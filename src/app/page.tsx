@@ -163,11 +163,11 @@ export default function Home() {
                       </div>
                       <div className="bg-gray-50 rounded-xl p-8">
                         <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                          НАЧНИТЕ ИССЛЕДОВАНИЕ ЧЕРЕЗ
+                          ПОГРУЗИТЕСЬ В ЦИФРОВУЮ
                           <br />
-                          ГАЛЕРЕЮ, ДЕМОНСТРИРУЮЩУЮ
+                          ГАЛЕРЕЮ СОВРЕМЕННОГО
                           <br />
-                          КРЕАТИВНОСТЬ МАСТЕРОВ.
+                          ТВОРЧЕСТВА И ИННОВАЦИЙ.
                         </h2>
                         <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto">
                           <div className="w-0 h-0 border-l-6 border-l-white border-y-4 border-y-transparent ml-1"></div>

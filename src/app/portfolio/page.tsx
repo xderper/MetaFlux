@@ -8,8 +8,8 @@ import PhotoGallery from '../../components/PhotoGallery';
 export default function PortfolioPage() {
   const featuredProjects = [
     {
-      title: "Gallery Artisan",
-      description: "Цифровая галерея современного искусства с уникальным интерактивным опытом",
+      title: "Todo",
+      description: "Эта лендинговая страница для управления задачами создана, чтобы помочь пользователям легко организовать работу.",
       category: "Веб-дизайн",
       year: "2024",
       technologies: ["React", "Next.js", "Three.js", "Tailwind CSS"],
@@ -19,11 +19,12 @@ export default function PortfolioPage() {
         conversion: "+150%"
       },
       color: "from-purple-500 to-pink-500",
+      image: "/todo.png",
       featured: true
     },
     {
-      title: "SnapShot Pro",
-      description: "Мобильное приложение для профессиональных фотографов с AI-обработкой",
+      title: "Cosma",
+      description: "Децентрализованная финансовая платформа, ориентированная на предоставление пользователям полного контроля над своими активами без участия традиционных институтов.",
       category: "Мобильное приложение",
       year: "2024",
       technologies: ["React Native", "AI/ML", "Firebase", "Stripe"],
@@ -32,51 +33,27 @@ export default function PortfolioPage() {
         rating: "4.9★",
         retention: "78%"
       },
+      image: "/cosma.png",
       color: "from-blue-500 to-cyan-500",
       featured: true
     },
     {
-      title: "ProNature ERP",
-      description: "Корпоративная система управления для экологических организаций",
+      title: "Hybrid Chess",
+      description: "Турнирная система для шахмат",
       category: "Веб-приложение",
       year: "2023",
-      technologies: ["Vue.js", "Node.js", "PostgreSQL", "Docker"],
+      technologies: ["Go", "Next.js", "PostgreSQL", "Docker"],
       metrics: {
         efficiency: "+300%",
         cost: "-40%",
         users: "2000+"
       },
-      color: "from-green-500 to-teal-500",
-      featured: true
+              color: "from-green-500 to-teal-500",
+        featured: true,
+        image: "/hybrid-chess.png"
     }
   ];
 
-  const achievements = [
-    {
-      icon: Award,
-      title: "Лучший UI/UX дизайн",
-      description: "Webby Awards 2024",
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      icon: Star,
-      title: "Проект года",
-      description: "Russian Design Awards 2023",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: Users,
-      title: "Выбор пользователей",
-      description: "App Store Best of 2024",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Zap,
-      title: "Инновация года",
-      description: "Digital Innovation Summit",
-      color: "from-green-500 to-teal-500"
-    }
-  ];
 
   const stats = [
     { number: "100+", label: "Завершённых проектов" },
@@ -88,32 +65,7 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50 text-gray-900 relative">
       <AnimatedBackground />
-      
-      {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span className="text-2xl font-bold text-white tracking-tight">M</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">MetaFlux</span>
-          </Link>
-          <nav className="hidden md:flex gap-8 text-base font-medium text-gray-600">
-            <Link href="/" className="hover:text-purple-600 transition-colors duration-300">Главная</Link>
-            <Link href="/about" className="hover:text-purple-600 transition-colors duration-300">О нас</Link>
-            <Link href="/services" className="hover:text-purple-600 transition-colors duration-300">Услуги</Link>
-            <Link href="/portfolio" className="text-purple-600">Портфолио</Link>
-            <Link href="/blog" className="hover:text-purple-600 transition-colors duration-300">Блог</Link>
-          </nav>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300"
-          >
-            Начать проект
-          </motion.button>
-        </div>
-      </header>
+    
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 relative overflow-hidden">
@@ -189,56 +141,72 @@ export default function PortfolioPage() {
               >
                 {/* Project Image */}
                 <div className="relative">
-                  <div className={`bg-gradient-to-br ${project.color} rounded-3xl p-8 text-white relative overflow-hidden`}>
-                    <div className="absolute inset-0 opacity-20">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
-                        <defs>
-                          <pattern id={`project-pattern-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                            <circle cx="10" cy="10" r="2" fill="#ffffff" opacity="0.1"/>
-                          </pattern>
-                        </defs>
-                        <rect width="100" height="100" fill={`url(#project-pattern-${index})`}/>
-                      </svg>
+                  {project.image ? (
+                    // Real project image
+                    <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-96 object-cover"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-40`}></div>
+                      <div className="absolute inset-0 p-8 text-white flex flex-col justify-between">
+                        <div>
+                          <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-4">
+                            {project.category}
+                          </span>
+                          <h3 className="text-3xl font-bold mb-4">{project.title}</h3>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-4 text-center">
+                          {Object.entries(project.metrics).map(([key, value], i) => (
+                            <div key={i} className="p-3 bg-white/10 backdrop-blur-sm rounded-2xl">
+                              <div className="text-2xl font-bold">{value}</div>
+                              <div className="text-sm opacity-80 capitalize">{key}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="relative z-10 h-80 flex flex-col justify-between">
-                      <div>
-                        <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4">
-                          {project.category}
-                        </span>
-                        <h3 className="text-3xl font-bold mb-4">{project.title}</h3>
+                  ) : (
+                    // Gradient placeholder for projects without images
+                    <div className={`bg-gradient-to-br ${project.color} rounded-3xl p-8 text-white relative overflow-hidden`}>
+                      <div className="absolute inset-0 opacity-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
+                          <defs>
+                            <pattern id={`project-pattern-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
+                              <circle cx="10" cy="10" r="2" fill="#ffffff" opacity="0.1"/>
+                            </pattern>
+                          </defs>
+                          <rect width="100" height="100" fill={`url(#project-pattern-${index})`}/>
+                        </svg>
                       </div>
                       
-                      <div className="grid grid-cols-3 gap-4 text-center">
-                        {Object.entries(project.metrics).map(([key, value], i) => (
-                          <div key={i}>
-                            <div className="text-2xl font-bold">{value}</div>
-                            <div className="text-sm opacity-80 capitalize">{key}</div>
-                          </div>
-                        ))}
+                      <div className="relative z-10 h-80 flex flex-col justify-between">
+                        <div>
+                          <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4">
+                            {project.category}
+                          </span>
+                          <h3 className="text-3xl font-bold mb-4">{project.title}</h3>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-4 text-center">
+                          {Object.entries(project.metrics).map(([key, value], i) => (
+                            <div key={i}>
+                              <div className="text-2xl font-bold">{value}</div>
+                              <div className="text-sm opacity-80 capitalize">{key}</div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Project Details */}
                 <div>
                   <div className="flex items-center gap-4 mb-6">
                     <span className="text-sm text-purple-600 font-medium">ПРОЕКТ {project.year}</span>
-                    <div className="flex gap-2">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
-                      >
-                        <ExternalLink className="w-5 h-5 text-gray-600" />
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
-                      >
-                        <Github className="w-5 h-5 text-gray-600" />
-                      </motion.button>
-                    </div>
                   </div>
                   
                   <h3 className="text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
@@ -255,14 +223,6 @@ export default function PortfolioPage() {
                     </div>
                   </div>
                   
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    Подробнее о проекте
-                    <ExternalLink className="w-4 h-4" />
-                  </motion.button>
                 </div>
               </motion.div>
             ))}
@@ -273,45 +233,7 @@ export default function PortfolioPage() {
       {/* Photo Gallery */}
       <PhotoGallery />
 
-      {/* Achievements Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl font-bold mb-6">
-              Наши
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {" "}достижения
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Признание экспертов и клиентов по всему миру
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center group"
-              >
-                <div className={`w-16 h-16 bg-gradient-to-br ${achievement.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <achievement.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{achievement.title}</h3>
-                <p className="text-gray-400">{achievement.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    
 
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-purple-600 to-blue-600 text-white">

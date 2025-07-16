@@ -1,7 +1,7 @@
 'use client';
 import Image from "next/image";
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Star, Users, Zap, Award } from 'lucide-react';
+import { ArrowRight, Play, Star, Users, Zap, Award, TrendingUp, Clock, CheckCircle, MessageCircle, ArrowDown, BookOpen, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import AnimatedBackground from '../components/AnimatedBackground';
 import VideoSection from '../components/VideoSection';
@@ -12,41 +12,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50 text-gray-900 relative">
       <AnimatedBackground />
       
-      {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span className="text-2xl font-bold text-white tracking-tight">M</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">MetaFlux</span>
-          </motion.div>
-          <nav className="hidden md:flex gap-8 text-base font-medium text-gray-600">
-            <Link href="/about" className="hover:text-purple-600 transition-colors duration-300">О нас</Link>
-            <Link href="/services" className="hover:text-purple-600 transition-colors duration-300">Услуги</Link>
-            <Link href="/portfolio" className="hover:text-purple-600 transition-colors duration-300">Портфолио</Link>
-            <Link href="/team" className="hover:text-purple-600 transition-colors duration-300">Команда</Link>
-            <Link href="/blog" className="hover:text-purple-600 transition-colors duration-300">Блог</Link>
-          </nav>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300"
-          >
-            Начать проект
-          </motion.button>
-          <button className="md:hidden w-8 h-8 flex flex-col justify-center gap-1">
-            <span className="w-full h-0.5 bg-gray-600 rounded"></span>
-            <span className="w-full h-0.5 bg-gray-600 rounded"></span>
-            <span className="w-full h-0.5 bg-gray-600 rounded"></span>
-          </button>
-        </div>
-      </header>
+    
 
       {/* Hero Section */}
       <section className="pt-20 min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
@@ -82,14 +48,14 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl"
             >
-              Забронировать звонок
+              Связаться с нами
             </motion.button>
             <motion.button 
               whileHover={{ scale: 1.05, borderColor: "#8b5cf6", color: "#8b5cf6" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-full font-semibold text-lg transition-all duration-300"
             >
-              Наши кейсы
+              Наши услуги
             </motion.button>
           </motion.div>
         </div>
@@ -102,7 +68,7 @@ export default function Home() {
           className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-6xl px-6"
         >
           <div className="flex justify-center items-center gap-8 md:gap-12 opacity-40 grayscale">
-            {['Gallery Artisan', 'SnapShot', 'ProNature', 'Network', 'Waveless', 'akacollective'].map((logo, index) => (
+            {['Веб-разработка', 'UI/UX дизайн', 'Мобильные приложения', 'Брендинг', 'Digital маркетинг', 'Консалтинг'].map((service, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -110,90 +76,17 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                 className="text-gray-500 font-medium text-sm md:text-base whitespace-nowrap"
               >
-                {logo}
+                {service}
               </motion.div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      {/* Hero Visual Section */}
-      <section className="py-20 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            {/* Main Mockup Container */}
-            <div className="relative bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-3xl p-8 md:p-16 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 to-pink-600/90 backdrop-blur-sm"></div>
-              
-              {/* Laptop Mockup */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative z-10 max-w-4xl mx-auto"
-              >
-                <div className="bg-gray-900 rounded-2xl p-2 shadow-2xl transform perspective-1000 rotate-y-5">
-                  <div className="bg-white rounded-xl overflow-hidden">
-                    <div className="bg-gray-100 px-4 py-3 flex items-center gap-2">
-                      <div className="flex gap-1">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      </div>
-                      <div className="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-500 ml-4">
-                        galleryartisan.com
-                      </div>
-                    </div>
-                    <div className="p-8 bg-white text-center">
-                      <div className="mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">Gallery Artisan</h3>
-                        <div className="flex justify-center gap-4 text-sm text-gray-600">
-                          <span>ГЛАВНАЯ</span>
-                          <span>ИСТОРИЯ</span>
-                          <span>ХУДОЖНИК</span>
-                          <span>ГАЛЕРЕЯ</span>
-                          <span>ПРЕСС-РЕЛИЗ</span>
-                          <span>КОНТАКТЫ</span>
-                        </div>
-                      </div>
-                      <div className="bg-gray-50 rounded-xl p-8">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                          ПОГРУЗИТЕСЬ В ЦИФРОВУЮ
-                          <br />
-                          ГАЛЕРЕЮ СОВРЕМЕННОГО
-                          <br />
-                          ТВОРЧЕСТВА И ИННОВАЦИЙ.
-                        </h2>
-                        <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto">
-                          <div className="w-0 h-0 border-l-6 border-l-white border-y-4 border-y-transparent ml-1"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
 
-              {/* Landing Page Badge */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white rounded-full px-6 py-3 shadow-lg flex items-center gap-3"
-              >
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">e</span>
-                </div>
-                <span className="font-bold text-gray-900">Лендинг</span>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
+      {/* Photo Gallery */}
+      <PhotoGallery />
 
       {/* Features Section */}
       <section className="py-20 px-6 bg-white">
@@ -257,14 +150,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Section */}
-      <VideoSection />
 
-      {/* Photo Gallery */}
-      <PhotoGallery />
+  
 
-      {/* 3D Cards Grid Section - Enhanced */}
-      <section className="py-20 px-6 bg-gray-900">
+      
+
+      
+
+    
+
+      {/* Process Section */}
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -272,101 +168,199 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Наши
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {" "}услуги
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Как мы
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                {" "}работаем
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Полный спектр digital-решений для вашего бизнеса
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Пошаговый процесс создания вашего проекта
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Создайте собственный продукт с кастомным приложением",
-                gradient: "from-blue-500 to-cyan-400",
-                shape: "rounded-3xl"
-              },
-              {
-                title: "Цветные формы делают дизайн особенным",
-                gradient: "from-green-400 to-blue-500",
-                shape: "rounded-full"
-              },
-              {
-                title: "Креативные идеи дизайна развивают ваш бизнес",
-                gradient: "from-purple-500 to-pink-500",
-                shape: "rounded-2xl"
-              },
-              {
-                title: "Всё что нужно для запуска и ведения бизнеса",
-                gradient: "from-red-500 to-orange-400",
-                shape: "rounded-3xl"
-              },
-              {
-                title: "Воплощаем ваши идеи в реальность со страстью",
-                gradient: "from-yellow-400 to-orange-500",
-                shape: "rounded-full"
-              },
-              {
-                title: "Профессиональные услуги для роста бизнеса",
-                gradient: "from-indigo-500 to-purple-600",
-                shape: "rounded-2xl"
-              }
-            ].map((card, index) => (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-gray-700 hover:border-purple-500/50 transition-all duration-500"
-              >
-                {/* 3D Shape */}
-                <div className="relative mb-6 h-32 flex items-center justify-center">
-                  <motion.div 
-                    animate={{ 
-                      rotateY: [0, 360],
-                      rotateX: [0, 10, 0]
-                    }}
-                    transition={{
-                      duration: 10,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                    className={`w-24 h-24 bg-gradient-to-br ${card.gradient} ${card.shape} opacity-80 group-hover:opacity-100 transition-opacity duration-500`}
-                  ></motion.div>
-                </div>
-                
-                <h3 className="text-xl font-bold text-white mb-4 leading-tight">
-                  {card.title}
-                </h3>
-                
-                <p className="text-gray-400 text-sm mb-6">
-                  Идеи, которые улучшают ваш продукт и развивают бизнес.
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex -space-x-2">
-                    {[1,2,3].map(i => (
-                      <div key={i} className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full border-2 border-gray-800"></div>
-                    ))}
+          <div className="relative">
+            {/* Process Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full hidden md:block"></div>
+            
+            <div className="space-y-16">
+              {[
+                {
+                  step: "01",
+                  title: "Исследование и анализ",
+                  description: "Изучаем ваш бизнес, целевую аудиторию и конкурентов для создания эффективной стратегии",
+                  color: "from-blue-500 to-cyan-500"
+                },
+                {
+                  step: "02", 
+                  title: "Планирование и дизайн",
+                  description: "Создаем детальный план проекта и разрабатываем уникальный дизайн, отражающий ваш бренд",
+                  color: "from-purple-500 to-pink-500"
+                },
+                {
+                  step: "03",
+                  title: "Разработка и тестирование",
+                  description: "Воплощаем дизайн в код, проводим тщательное тестирование для обеспечения качества",
+                  color: "from-green-500 to-emerald-500"
+                },
+                {
+                  step: "04",
+                  title: "Запуск и поддержка",
+                  description: "Запускаем проект и обеспечиваем постоянную поддержку для достижения ваших целей",
+                  color: "from-orange-500 to-red-500"
+                }
+              ].map((process, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} max-w-6xl mx-auto`}
+                >
+                  <div className="md:w-1/2 p-8">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${process.color} rounded-2xl text-white font-bold text-2xl mb-6`}>
+                      {process.step}
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{process.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{process.description}</p>
                   </div>
-                  <motion.button 
-                    whileHover={{ scale: 1.1, backgroundColor: '#8b5cf6' }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.button>
+                  <div className="md:w-1/2 flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.05, rotate: 5 }}
+                      className={`w-32 h-32 bg-gradient-to-br ${process.color} rounded-3xl opacity-20`}
+                    ></motion.div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+          {/* Statistics Section */}
+          <section className="py-20 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              Цифры говорят
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {" "}за нас
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Результаты нашей работы в цифрах
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { number: "500+", label: "Завершенных проектов", icon: CheckCircle },
+              { number: "150+", label: "Довольных клиентов", icon: Users },
+              { number: "98%", label: "Успешных запусков", icon: TrendingUp },
+              { number: "24/7", label: "Поддержка клиентов", icon: Clock }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="text-center group"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="w-8 h-8 text-white" />
                 </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2"
+                >
+                  {stat.number}
+                </motion.div>
+                <p className="text-gray-400 font-medium">{stat.label}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Часто задаваемые
+              <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                {" "}вопросы
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              Ответы на самые популярные вопросы о нашей работе
+            </p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {[
+              {
+                question: "Сколько времени занимает разработка проекта?",
+                answer: "Время разработки зависит от сложности проекта. Простые сайты занимают 2-4 недели, сложные веб-приложения - от 2 до 6 месяцев. Мы всегда обсуждаем сроки на этапе планирования."
+              },
+              {
+                question: "Предоставляете ли вы поддержку после запуска?",
+                answer: "Да, мы предоставляем полную техническую поддержку и сопровождение проектов. Включает обновления, резервное копирование, мониторинг безопасности и консультации."
+              },
+              {
+                question: "Можете ли вы работать с нашим существующим дизайном?",
+                answer: "Конечно! Мы можем работать как с готовыми дизайнами, так и создавать новые с нуля. Адаптируем любой дизайн под современные стандарты и лучшие практики."
+              },
+              {
+                question: "Какие технологии вы используете?",
+                answer: "Мы работаем с современными технологиями: React, Next.js, Node.js, Python, TypeScript и многими другими. Выбираем технологии исходя из требований проекта."
+              },
+              {
+                question: "Сколько стоят ваши услуги?",
+                answer: "Стоимость зависит от объема и сложности проекта. Мы предоставляем детальную смету после анализа требований. Свяжитесь с нами для индивидуального расчета."
+              }
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-2xl border border-gray-200 overflow-hidden"
+              >
+                <motion.button
+                  whileHover={{ backgroundColor: '#f8fafc' }}
+                  className="w-full px-8 py-6 text-left focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset"
+                >
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold text-gray-900 pr-8">{faq.question}</h3>
+                    <ArrowDown className="w-5 h-5 text-gray-500 transform transition-transform duration-200" />
+                  </div>
+                  <div className="mt-4 text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
+
+      
 
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-500">
@@ -405,68 +399,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
-                  <span className="text-lg font-bold text-white">M</span>
-                </div>
-                <span className="text-xl font-bold">MetaFlux</span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Создаём цифровое будущее для вашего бизнеса
-              </p>
-              <div className="flex gap-4">
-                {['tw', 'fb', 'ig', 'ln'].map((social, i) => (
-                  <div key={i} className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer">
-                    <span className="text-sm font-bold">{social}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {[
-              {
-                title: "Услуги",
-                links: ["Веб-дизайн", "Мобильные приложения", "Брендинг", "UX/UI дизайн"]
-              },
-              {
-                title: "Компания",
-                links: ["О нас", "Команда", "Карьера", "Контакты"]
-              },
-              {
-                title: "Ресурсы",
-                links: ["Блог", "Кейсы", "FAQ", "Поддержка"]
-              }
-            ].map((column, index) => (
-              <div key={index}>
-                <h3 className="font-semibold mb-4">{column.title}</h3>
-                <ul className="space-y-2">
-                  {column.links.map((link, i) => (
-                    <li key={i}>
-                      <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400">© 2024 MetaFlux. Все права защищены.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Политика конфиденциальности</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Условия использования</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

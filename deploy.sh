@@ -24,7 +24,8 @@ if ! command -v docker-compose &> /dev/null; then
 fi
 
 # Проверяем переменные окружения
-read -p "Введите домен для сайта (или оставьте пустым для localhost): " DOMAIN
+read -p "Введите домен для сайта (по умолчанию mtflux.ru): " DOMAIN
+DOMAIN=${DOMAIN:-mtflux.ru}
 read -p "Использовать SSL? (y/n): " USE_SSL
 
 # Останавливаем предыдущие контейнеры
@@ -51,8 +52,8 @@ if [ "$USE_SSL" = "y" ] || [ "$USE_SSL" = "Y" ]; then
             openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
                 -keyout ssl/key.pem \
                 -out ssl/cert.pem \
-                -subj "/C=RU/ST=State/L=City/O=Organization/CN=${DOMAIN:-localhost}"
-            echo "✅ Самоподписанный сертификат создан"
+                -subj "/C=RU/ST=State/L=City/O=MetaFlux/CN=$DOMAIN"
+            echo "✅ Самоподписанный сертификат создан для $DOMAIN"
         else
             echo "❌ SSL сертификаты необходимы для продакшн конфигурации"
             exit 1
@@ -83,9 +84,11 @@ echo ""
 echo "🎉 Развертывание завершено!"
 echo "📱 Приложение доступно по адресу:"
 if [ "$USE_SSL" = "y" ] || [ "$USE_SSL" = "Y" ]; then
-    echo "   https://${DOMAIN:-localhost}"
+    echo "   https://$DOMAIN"
+    echo "   https://www.$DOMAIN"
 else
-    echo "   http://${DOMAIN:-localhost}"
+    echo "   http://$DOMAIN"
+    echo "   http://www.$DOMAIN"
 fi
 echo ""
 echo "🔧 Полезные команды:"

@@ -12,7 +12,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/YOUR_USERNAME/metaflux.git
 cd metaflux
 ```
 
@@ -34,7 +34,7 @@ cd metaflux
 # Сборка и запуск
 docker-compose -f docker-compose.simple.yml up -d --build
 
-# Приложение будет доступно на http://your-domain:80
+# Приложение будет доступно на http://mtflux.ru:80
 ```
 
 ### Вариант 2: Только Next.js (разработка)
@@ -58,7 +58,7 @@ mkdir ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout ssl/key.pem \
   -out ssl/cert.pem \
-  -subj "/C=RU/ST=State/L=City/O=Organization/CN=your-domain.com"
+  -subj "/C=RU/ST=State/L=City/O=MetaFlux/CN=mtflux.ru"
 
 # 4. Запустите продакшн конфигурацию
 docker-compose -f docker-compose.prod.yml up -d --build
@@ -132,11 +132,11 @@ sudo apt update
 sudo apt install certbot
 
 # Получение сертификата
-sudo certbot certonly --standalone -d your-domain.com
+sudo certbot certonly --standalone -d mtflux.ru -d www.mtflux.ru
 
 # Копирование сертификатов
-sudo cp /etc/letsencrypt/live/your-domain.com/fullchain.pem ssl/cert.pem
-sudo cp /etc/letsencrypt/live/your-domain.com/privkey.pem ssl/key.pem
+sudo cp /etc/letsencrypt/live/mtflux.ru/fullchain.pem ssl/cert.pem
+sudo cp /etc/letsencrypt/live/mtflux.ru/privkey.pem ssl/key.pem
 sudo chown $USER:$USER ssl/*.pem
 ```
 
@@ -146,8 +146,8 @@ sudo chown $USER:$USER ssl/*.pem
 cat > renew-ssl.sh << 'EOF'
 #!/bin/bash
 sudo certbot renew --quiet
-sudo cp /etc/letsencrypt/live/your-domain.com/fullchain.pem ssl/cert.pem
-sudo cp /etc/letsencrypt/live/your-domain.com/privkey.pem ssl/key.pem
+sudo cp /etc/letsencrypt/live/mtflux.ru/fullchain.pem ssl/cert.pem
+sudo cp /etc/letsencrypt/live/mtflux.ru/privkey.pem ssl/key.pem
 sudo chown $USER:$USER ssl/*.pem
 docker-compose -f docker-compose.prod.yml restart nginx
 EOF
@@ -160,15 +160,16 @@ chmod +x renew-ssl.sh
 
 ## 🌐 Настройка домена
 
-1. Настройте A-запись в DNS:
+1. Настройте A-записи в DNS:
    ```
-   A record: your-domain.com -> IP_ADDRESS_VPS
+   A record: mtflux.ru -> IP_ADDRESS_VPS
+   A record: www.mtflux.ru -> IP_ADDRESS_VPS
    ```
 
-2. Обновите nginx конфигурацию:
+2. Nginx конфигурация уже настроена для домена mtflux.ru
    ```bash
-   # Замените server_name _ на ваш домен в nginx.conf
-   server_name your-domain.com www.your-domain.com;
+   # В nginx.conf уже указано:
+   server_name mtflux.ru www.mtflux.ru;
    ```
 
 ## 🔧 Настройка производительности

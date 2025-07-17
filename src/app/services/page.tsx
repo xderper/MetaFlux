@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, Star, Zap, Code, Palette, Smartphone, Globe, TrendingUp, Users, Sparkles, Award, Clock, Shield, Eye, Heart, Gem, Rocket, Wand2 } from 'lucide-react';
 import Link from 'next/link';
+import { TELEGRAM } from '../../config/env';
 
 export default function ServicesPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -15,6 +16,13 @@ export default function ServicesPage() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const services = [
     {
@@ -252,6 +260,22 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
+            {/* Brand Icon */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.5, y: -30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+              className="flex justify-center mb-8"
+            >
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl p-4 glass-effect neon-glow">
+                <img 
+                  src="/icon.png" 
+                  alt="MetaFlux Logo" 
+                  className="w-full h-full object-contain filter brightness-0 invert"
+                />
+              </div>
+            </motion.div>
+            
             <motion.div 
               className="inline-flex items-center gap-3 glass-effect px-6 py-3 rounded-full font-semibold text-lg mb-8 neon-glow"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -309,6 +333,7 @@ export default function ServicesPage() {
               <motion.button
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={scrollToServices}
                 className="group relative px-8 py-4 glass-effect rounded-full font-semibold text-lg neon-glow overflow-hidden"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
@@ -321,10 +346,13 @@ export default function ServicesPage() {
                 <div className="absolute inset-0 holographic opacity-0 group-hover:opacity-20 transition-opacity"></div>
               </motion.button>
               
-              <motion.button
+              <motion.a
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 border-2 border-purple-400 rounded-full font-semibold text-lg text-purple-400 hover:text-white transition-colors overflow-hidden"
+                className="group relative px-8 py-4 border-2 border-purple-400 rounded-full font-semibold text-lg text-purple-400 hover:text-white transition-colors overflow-hidden inline-block text-center"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
@@ -333,14 +361,14 @@ export default function ServicesPage() {
                   Связаться с нами
                 </span>
                 <div className="absolute inset-0 holographic opacity-0 group-hover:opacity-10 transition-opacity"></div>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-6 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      <section id="services-section" className="py-20 px-6 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -420,17 +448,20 @@ export default function ServicesPage() {
                   
                   <div className="flex items-center justify-between">
                     <div className="text-3xl font-bold text-shimmer">{service.price}</div>
-                    <motion.button
+                    <motion.a
+                      href={TELEGRAM}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="relative group/btn px-6 py-3 glass-effect rounded-full font-medium text-white border border-purple-400/50 hover:border-purple-400 transition-all duration-300 overflow-hidden"
+                      className="relative group/btn px-6 py-3 glass-effect rounded-full font-medium text-white border border-purple-400/50 hover:border-purple-400 transition-all duration-300 overflow-hidden inline-block"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         Заказать
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </span>
                       <div className="absolute inset-0 holographic opacity-0 group-hover/btn:opacity-20 transition-opacity"></div>
-                    </motion.button>
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>
@@ -581,7 +612,10 @@ export default function ServicesPage() {
               Расскажите нам о вашей идее, и мы поможем воплотить её в жизнь
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
@@ -589,7 +623,7 @@ export default function ServicesPage() {
                 <span className="relative z-10">Обсудить проект</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         </div>

@@ -1,0 +1,1 @@
+export const TELEGRAM = process.env.NEXT_PUBLIC_TELEGRAM || 'https://t.me/your_telegram_username'; 

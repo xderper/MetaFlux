@@ -1,6 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
+import { TELEGRAM } from '../config/env';
 
 export default function Header() {
   return (
@@ -13,8 +15,14 @@ export default function Header() {
           className="flex items-center gap-3"
         >
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span className="text-2xl font-bold text-white tracking-tight">M</span>
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg p-2">
+              <Image 
+                src="/icon.png" 
+                alt="MetaFlux Logo" 
+                width={32} 
+                height={32} 
+                className="w-full h-full object-contain filter brightness-0 invert"
+              />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">MetaFlux</span>
           </Link>
@@ -24,13 +32,16 @@ export default function Header() {
           <Link href="/services" className="hover:text-purple-600 transition-colors duration-300">Услуги</Link>
           <Link href="/portfolio" className="hover:text-purple-600 transition-colors duration-300">Портфолио</Link>
         </nav>
-        <motion.button 
+        <motion.a 
+          href={TELEGRAM}
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="hidden md:block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300"
+          className="hidden md:block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300 text-center"
         >
           Связаться с нами
-        </motion.button>
+        </motion.a>
         <button className="md:hidden w-8 h-8 flex flex-col justify-center gap-1">
           <span className="w-full h-0.5 bg-gray-600 rounded"></span>
           <span className="w-full h-0.5 bg-gray-600 rounded"></span>

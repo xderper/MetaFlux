@@ -6,6 +6,7 @@ import Link from 'next/link';
 import AnimatedBackground from '../components/AnimatedBackground';
 import VideoSection from '../components/VideoSection';
 import PhotoGallery from '../components/PhotoGallery';
+import { TELEGRAM } from '../config/env';
 
 export default function Home() {
   return (
@@ -17,10 +18,28 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-20 min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* Brand Icon */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5, y: -30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+            className="flex justify-center mb-8"
+          >
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl p-4">
+              <Image 
+                src="/icon.png" 
+                alt="MetaFlux Logo" 
+                width={48} 
+                height={48} 
+                className="w-full h-full object-contain filter brightness-0 invert"
+              />
+            </div>
+          </motion.div>
+          
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl md:text-8xl font-bold mb-8 leading-tight"
           >
             Elevating Business and
@@ -43,20 +62,24 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <motion.button 
+            <motion.a 
+              href={TELEGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl"
+              className="px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl inline-block text-center"
             >
               Связаться с нами
-            </motion.button>
-            <motion.button 
+            </motion.a>
+            <motion.a
+              href="/services"
               whileHover={{ scale: 1.05, borderColor: "#8b5cf6", color: "#8b5cf6" }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-full font-semibold text-lg transition-all duration-300"
+              className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-full font-semibold text-lg transition-all duration-300 text-center"
             >
               Наши услуги
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
 
@@ -379,22 +402,17 @@ export default function Home() {
               Свяжитесь с нами сегодня и давайте создадим что-то удивительное вместе
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-600 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300"
               >
                 Начать проект
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300"
-              >
-                <Play className="w-5 h-5" />
-                Смотреть демо
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         </div>

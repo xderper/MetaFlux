@@ -2,9 +2,20 @@
 import { motion } from 'framer-motion';
 import { Star, Users, Award, Target, Heart, Zap, TrendingUp, Globe, Code, Palette, Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import AnimatedBackground from '../../components/AnimatedBackground';
+import { TELEGRAM } from '../../config/env';
 
 export default function AboutPage() {
+  const router = useRouter();
+  
+  const scrollToStats = () => {
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+      statsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const stats = [
     { number: "100+", label: "Успешных проектов", icon: Award },
     { number: "50+", label: "Довольных клиентов", icon: Users },
@@ -196,6 +207,22 @@ export default function AboutPage() {
             transition={{ duration: 1 }}
             className="text-center mb-20"
           >
+            {/* Brand Icon */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.5, y: -30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+              className="flex justify-center mb-8"
+            >
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl p-4">
+                <img 
+                  src="/icon.png" 
+                  alt="MetaFlux Logo" 
+                  className="w-full h-full object-contain filter brightness-0 invert"
+                />
+              </div>
+            </motion.div>
+            
             {/* Анимированный заголовок */}
             <div className="text-7xl md:text-9xl font-bold mb-12 leading-tight">
               <div className="mb-6">
@@ -275,14 +302,17 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 2.2 }}
               className="flex flex-col sm:flex-row gap-6 justify-center"
             >
-              <motion.button
+              <motion.a
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ 
                   scale: 1.05, 
                   boxShadow: "0 25px 50px rgba(147, 51, 234, 0.5)",
                   y: -2
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white rounded-full font-semibold text-xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 relative overflow-hidden group"
+                className="px-10 py-5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white rounded-full font-semibold text-xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 relative overflow-hidden group inline-block text-center"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Начать проект
@@ -292,9 +322,10 @@ export default function AboutPage() {
                   className="absolute inset-0 bg-gradient-to-r from-purple-700 via-pink-700 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={false}
                 />
-              </motion.button>
+              </motion.a>
               
               <motion.button
+                onClick={scrollToStats}
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -333,7 +364,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 px-6 bg-gradient-to-r from-white via-purple-50 to-pink-50">
+      <section id="stats-section" className="py-24 px-6 bg-gradient-to-r from-white via-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -594,15 +625,19 @@ export default function AboutPage() {
               Давайте обсудим, как мы можем помочь вашему бизнесу достичь новых высот
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <motion.button 
+              <motion.a 
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-5 bg-white text-purple-600 rounded-full font-semibold text-xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-white/20 flex items-center gap-3 justify-center"
               >
-                Забронировать звонок
+                Связаться с нами
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              </motion.a>
               <motion.button 
+                onClick={() => router.push('/portfolio')}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-5 border-2 border-white/30 text-white rounded-full font-semibold text-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"

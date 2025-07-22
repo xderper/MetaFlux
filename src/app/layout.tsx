@@ -7,11 +7,13 @@ import Footer from "../components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -29,6 +31,13 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://metaflux.ru'),
   alternates: {
     canonical: '/',
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
   },
   icons: {
     icon: [
@@ -79,6 +88,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'apple-mobile-web-app-title': 'MetaFlux',
+    'application-name': 'MetaFlux',
+    'msapplication-TileColor': '#8b5cf6',
+    'theme-color': '#8b5cf6',
+  },
 };
 
 export default function RootLayout({
@@ -93,12 +111,22 @@ export default function RootLayout({
         <link rel="icon" href="/icon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="MetaFlux" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="MetaFlux" />
+        <meta name="msapplication-TileColor" content="#8b5cf6" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased safe-area-inset-top`}
       >
         <Header />
-        {children}
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

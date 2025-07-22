@@ -63,21 +63,21 @@ export default function PhotoGallery() {
     : galleryItems.filter(item => item.category === filter);
 
   return (
-    <section className="py-20 px-6 bg-gray-900">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-2">
             Наши
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {" "}работы
             </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Каждый проект — это уникальная история успеха наших клиентов
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ export default function PhotoGallery() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mb-8 sm:mb-12 px-2"
         >
           {categories.map((category) => (
             <motion.button
@@ -95,7 +95,7 @@ export default function PhotoGallery() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base min-h-[40px] sm:min-h-[48px] ${
                 filter === category
                   ? 'bg-purple-600 text-white shadow-lg'
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
@@ -109,7 +109,7 @@ export default function PhotoGallery() {
         {/* Gallery Grid */}
         <motion.div 
           layout
-          className="grid md:grid-cols-1 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
         >
           <AnimatePresence>
             {filteredItems.map((item, index) => (
@@ -121,7 +121,7 @@ export default function PhotoGallery() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl h-96">
+                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl h-80 sm:h-96">
                   {item.image ? (
                     // Real project image
                     <>
@@ -151,16 +151,16 @@ export default function PhotoGallery() {
                   )}
                   
                   {/* Content overlay - same for all items */}
-                  <div className="absolute inset-0 p-8 text-white flex flex-col justify-between">
+                  <div className="absolute inset-0 p-4 sm:p-6 lg:p-8 text-white flex flex-col justify-between">
                     <div>
-                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-4">
+                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
                         {item.category}
                       </span>
-                      <h3 className="text-3xl font-bold mb-4">{item.title}</h3>
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">{item.title}</h3>
                     </div>
                     
                     <div className="relative z-10">
-                      <p className="text-white/90 text-base leading-relaxed">{item.description}</p>
+                      <p className="text-white/90 text-sm sm:text-base leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 </div>

@@ -132,7 +132,7 @@ export default function AboutPage() {
       <AnimatedBackground />
       
       {/* Hero Section */}
-      <section className="h-screen flex items-center justify-center px-6 relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
         {/* Улучшенные декоративные элементы */}
         <FloatingElement 
           delay={0} 
@@ -364,7 +364,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section id="stats-section" className="py-24 px-6 bg-gradient-to-r from-white via-purple-50 to-pink-50">
+      <section id="stats-section" className="py-24 px-6 bg-gradient-to-r from-white via-purple-50 to-pink-50 mt-16">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}

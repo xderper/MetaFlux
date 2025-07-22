@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1f2937;
+  --background: #1f2937;
+  --foreground: #ffffff;
   --accent: #8b5cf6;
   --accent-secondary: #3b82f6;
   --purple-gradient: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
@@ -22,11 +22,31 @@ body {
   transition: background 0.4s, color 0.4s;
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
+}
+
+/* Mobile viewport fix */
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Scrollbar */
@@ -37,6 +57,57 @@ html {
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #8b5cf6, #3b82f6);
   border-radius: 8px;
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  /* Larger touch targets on touch devices */
+  button, a[role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover,
+  .hover-float:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+}
+
+/* Safe area handling for modern mobile devices */
+@supports (padding: max(0px)) {
+  .safe-area-inset-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-inset-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-inset-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-area-inset-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 /* Glassmorphism */
@@ -71,6 +142,77 @@ html {
 
 .rotate-y-5 {
   transform: rotateY(-5deg);
+}
+
+/* Mobile-first responsive typography */
+.text-responsive-xs {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.text-responsive-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.text-responsive-base {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.text-responsive-lg {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.text-responsive-xl {
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+.text-responsive-2xl {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.text-responsive-3xl {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.text-responsive-4xl {
+  font-size: 1.875rem;
+  line-height: 1.1;
+}
+
+.text-responsive-5xl {
+  font-size: 2.25rem;
+  line-height: 1.1;
+}
+
+.text-responsive-6xl {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* Scale up on larger screens */
+@media (min-width: 640px) {
+  .text-responsive-base { font-size: 1rem; }
+  .text-responsive-lg { font-size: 1.125rem; }
+  .text-responsive-xl { font-size: 1.25rem; }
+  .text-responsive-2xl { font-size: 1.5rem; }
+  .text-responsive-3xl { font-size: 1.875rem; }
+  .text-responsive-4xl { font-size: 2.25rem; }
+  .text-responsive-5xl { font-size: 3rem; }
+  .text-responsive-6xl { font-size: 3.75rem; }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-2xl { font-size: 1.875rem; }
+  .text-responsive-3xl { font-size: 2.25rem; }
+  .text-responsive-4xl { font-size: 3rem; }
+  .text-responsive-5xl { font-size: 4.5rem; }
+  .text-responsive-6xl { font-size: 6rem; }
 }
 
 /* Animations */
@@ -423,25 +565,310 @@ html {
   text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
 }
 
-/* Responsive typography */
-@media (max-width: 640px) {
-  .text-responsive-xl {
-    font-size: 3rem;
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Reduce font sizes for mobile */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Reduce motion on mobile for better performance */
+  .animate-floating {
+    animation-duration: 4s;
+  }
+  
+  .card-3d:hover {
+    transform: none;
+  }
+  
+  /* Adjust padding for mobile */
+  .mobile-px {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .mobile-py {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  /* Better touch targets */
+  button, .btn-primary, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize hero text for mobile */
+  .hero-title {
+    font-size: 2rem;
     line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  
+  /* Disable hover effects on mobile */
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover,
+  .hover-float:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+  
+  /* Optimize glassmorphism for mobile */
+  .glassmorphism {
+    backdrop-filter: blur(10px);
+  }
+  
+  .glassmorphism-dark {
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Reduce blur intensity on mobile for performance */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px);
+  }
+  
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(16px);
+  }
+  
+  /* Mobile navigation improvements */
+  .mobile-menu-item {
+    padding: 1rem;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-menu-item:active {
+    background-color: rgba(139, 92, 246, 0.1);
+  }
+  
+  /* Mobile-specific spacing */
+  .space-y-mobile-sm > * + * {
+    margin-top: 0.5rem;
+  }
+  
+  .space-y-mobile-md > * + * {
+    margin-top: 1rem;
+  }
+  
+  .space-y-mobile-lg > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  /* Mobile grid utilities */
+  .grid-mobile-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-mobile-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Mobile text utilities */
+  .text-mobile-xs { font-size: 0.75rem; }
+  .text-mobile-sm { font-size: 0.875rem; }
+  .text-mobile-base { font-size: 1rem; }
+  .text-mobile-lg { font-size: 1.125rem; }
+  .text-mobile-xl { font-size: 1.25rem; }
+  .text-mobile-2xl { font-size: 1.5rem; }
+  .text-mobile-3xl { font-size: 1.875rem; }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  /* Even smaller text for very small screens */
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.875rem;
+  }
+  
+  /* Adjust grid layouts */
+  .grid-mobile-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Optimize button sizes */
+  .btn-mobile {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Reduce section padding */
+  .section-mobile {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Smaller mobile spacing */
+  .gap-mobile-sm {
+    gap: 0.5rem;
+  }
+  
+  .gap-mobile-md {
+    gap: 1rem;
+  }
+  
+  .p-mobile-sm {
+    padding: 0.75rem;
+  }
+  
+  .p-mobile-md {
+    padding: 1rem;
   }
 }
 
-@media (min-width: 641px) {
-  .text-responsive-xl {
-    font-size: 4.5rem;
-    line-height: 1.1;
+/* Tablet improvements */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet-specific adjustments */
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tablet-text-lg {
+    font-size: 1.125rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .text-responsive-xl {
-    font-size: 6rem;
-    line-height: 1.1;
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover,
+  .hover-float:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+  
+  /* Increase touch targets */
+  button, .btn-primary, a[role="button"], input, select, textarea {
+    min-height: 44px;
+  }
+  
+  /* Optimize scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimize for retina displays */
+  .retina-border {
+    border-width: 0.5px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-floating,
+  .animate-pulse-glow,
+  .animate-gradient,
+  .animate-shimmer,
+  .animate-bounce-in {
+    animation: none !important;
+  }
+}
+
+/* Dark mode improvements for mobile */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  .mobile-dark-card {
+    background: rgba(17, 25, 40, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+  /* Reduce vertical padding in landscape */
+  .landscape-py-sm {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Adjust hero section for landscape */
+  .hero-landscape {
+    min-height: 80vh;
+  }
+}
+
+/* Focus improvements for mobile */
+@media (max-width: 768px) {
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid #8b5cf6;
+    outline-offset: 2px;
+  }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+  /* Reduce expensive effects on mobile */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    image-rendering: optimizeQuality;
+  }
+}
+
+/* Utility classes for mobile responsiveness */
+.mobile-hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-hidden {
+    display: block;
+  }
+}
+
+.desktop-hidden {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .desktop-hidden {
+    display: none;
   }
 }
 

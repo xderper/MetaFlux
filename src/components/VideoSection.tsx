@@ -7,47 +7,47 @@ export default function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className="py-20 px-6 relative bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative bg-gradient-to-b from-gray-900 to-black overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-2">
             Смотрите как мы
             <br />
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               создаём магию
             </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Погрузитесь в наш творческий процесс и увидьте, как рождаются уникальные digital-решения
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Main Video */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative group"
+            className="relative group order-2 lg:order-1"
           >
-            <div className="relative bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-1">
-              <div className="bg-black rounded-3xl overflow-hidden aspect-video">
+            <div className="relative bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl sm:rounded-3xl p-0.5 sm:p-1">
+              <div className="bg-black rounded-2xl sm:rounded-3xl overflow-hidden aspect-video">
                 <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-20 h-20 bg-white rounded-full flex items-center justify-center group-hover:bg-purple-400 transition-colors duration-300"
+                    className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center group-hover:bg-purple-400 transition-colors duration-300"
                   >
                     {isPlaying ? (
-                      <Pause className="w-8 h-8 text-gray-900" />
+                      <Pause className="w-6 h-6 sm:w-8 sm:h-8 text-gray-900" />
                     ) : (
-                      <Play className="w-8 h-8 text-gray-900 ml-1" />
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 text-gray-900 ml-0.5 sm:ml-1" />
                     )}
                   </motion.button>
                   
@@ -71,15 +71,15 @@ export default function VideoSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-6"
+              className="mt-4 sm:mt-6"
             >
-              <h3 className="text-2xl font-bold text-white mb-2">Процесс создания UI/UX</h3>
-              <p className="text-gray-400">От идеи до реализации за 5 минут</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Процесс создания UI/UX</h3>
+              <p className="text-gray-400 text-sm sm:text-base">От идеи до реализации за 5 минут</p>
             </motion.div>
           </motion.div>
 
           {/* Video Gallery */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
             {[
               { title: "Разработка брендинга", duration: "3:45" },
               { title: "Мобильная разработка", duration: "5:20" },
@@ -90,22 +90,22 @@ export default function VideoSection() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="flex items-center gap-4 p-4 bg-gray-800/50 rounded-2xl hover:bg-gray-800 transition-all duration-300 group cursor-pointer"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-800/50 rounded-xl sm:rounded-2xl hover:bg-gray-800 transition-all duration-300 group cursor-pointer"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
-                  <Play className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-white font-semibold group-hover:text-purple-400 transition-colors">
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-white font-semibold group-hover:text-purple-400 transition-colors text-sm sm:text-base truncate">
                     {video.title}
                   </h4>
-                  <p className="text-gray-400 text-sm">{video.duration}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">{video.duration}</p>
                 </div>
                 <motion.div
-                  className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0"
                   whileHover={{ scale: 1.1, backgroundColor: '#8b5cf6' }}
                 >
-                  <Play className="w-4 h-4 text-white" />
+                  <Play className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                 </motion.div>
               </motion.div>
             ))}

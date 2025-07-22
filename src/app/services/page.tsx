@@ -207,7 +207,7 @@ export default function ServicesPage() {
 
       {/* Custom cursor effect */}
       <div 
-        className="cursor-glow"
+        className="cursor-glow hidden md:block"
         style={{
           left: mousePosition.x - 10,
           top: mousePosition.y - 10,
@@ -216,7 +216,7 @@ export default function ServicesPage() {
       />
 
       {/* Enhanced Floating Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none hidden md:block">
         {/* Holographic blobs */}
         <div className="absolute top-20 left-10 w-96 h-96 holographic rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob"></div>
         <div className="absolute top-40 right-10 w-80 h-80 holographic rounded-full mix-blend-multiply filter blur-2xl opacity-25 animate-blob animation-delay-2000"></div>
@@ -245,13 +245,13 @@ export default function ServicesPage() {
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-purple-900/50 to-slate-900/90"></div>
         
-        {/* 3D floating elements */}
-        <div className="absolute top-20 left-20 w-32 h-32 glass-effect rounded-full flex items-center justify-center animate-float">
-          <Gem className="w-16 h-16 text-purple-400 animate-sparkle" />
-        </div>
-        <div className="absolute top-40 right-20 w-24 h-24 glass-effect rounded-lg flex items-center justify-center animate-float float-delay-1">
-          <Rocket className="w-12 h-12 text-cyan-400 animate-wiggle" />
-        </div>
+                 {/* 3D floating elements */}
+         <div className="absolute top-20 left-20 w-32 h-32 glass-effect rounded-full flex items-center justify-center animate-float hidden md:block">
+           <Gem className="w-16 h-16 text-purple-400 animate-sparkle" />
+         </div>
+         <div className="absolute top-40 right-20 w-24 h-24 glass-effect rounded-lg flex items-center justify-center animate-float float-delay-1 hidden md:block">
+           <Rocket className="w-12 h-12 text-cyan-400 animate-wiggle" />
+         </div>
         
         <div className="max-w-7xl mx-auto relative z-10 w-full">
           <motion.div
@@ -284,9 +284,9 @@ export default function ServicesPage() {
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              <Sparkles className="w-6 h-6 text-purple-400 animate-sparkle" />
+              <Sparkles className="w-6 h-6 text-purple-400 animate-sparkle hidden md:inline" />
               <span className="text-shimmer">Premium Digital Solutions</span>
-              <Zap className="w-6 h-6 text-cyan-400 animate-wiggle" />
+              <Zap className="w-6 h-6 text-cyan-400 animate-wiggle hidden md:inline" />
             </motion.div>
             
             <motion.h1 
@@ -339,7 +339,7 @@ export default function ServicesPage() {
                 onMouseLeave={() => setIsHovering(false)}
               >
                 <span className="relative z-10 text-white flex items-center gap-3">
-                  <Eye className="w-6 h-6 animate-wiggle" />
+                  <Eye className="w-6 h-6 animate-wiggle hidden md:inline" />
                   Посмотреть услуги
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                 </span>
@@ -357,7 +357,7 @@ export default function ServicesPage() {
                 onMouseLeave={() => setIsHovering(false)}
               >
                 <span className="relative z-10 flex items-center gap-3">
-                  <Heart className="w-6 h-6 animate-sparkle" />
+                  <Heart className="w-6 h-6 animate-sparkle hidden md:inline" />
                   Связаться с нами
                 </span>
                 <div className="absolute inset-0 holographic opacity-0 group-hover:opacity-10 transition-opacity"></div>
@@ -512,7 +512,7 @@ export default function ServicesPage() {
                   <div className="pt-8 relative z-10 flex-grow flex flex-col">
                     <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-4">{process.title}</h3>
                     <div className="flex items-start gap-4">
-                      <span className="text-3xl animate-float">{process.icon}</span>
+                      <span className="text-3xl animate-float hidden md:inline">{process.icon}</span>
                       <p className="text-gray-400 leading-relaxed flex-grow">{process.description}</p>
                     </div>
                   </div>
@@ -606,7 +606,7 @@ export default function ServicesPage() {
               Готовы начать
               <br />
               ваш проект?
-              <span className="text-4xl animate-bounce ml-4">🚀</span>
+              <span className="text-4xl animate-bounce ml-4 hidden md:inline">🚀</span>
             </h2>
             <p className="text-xl text-white/90 mb-12">
               Расскажите нам о вашей идее, и мы поможем воплотить её в жизнь

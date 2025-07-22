@@ -1,12 +1,71 @@
 {
-  "name": "MetaFlux — Digital-агентство будущего",
+  "name": "MetaFlux — Премиум Digital-агентство",
   "short_name": "MetaFlux",
-  "description": "MetaFlux — инновационное digital-агентство полного цикла. Создаём революционные веб-сайты, мобильные приложения, уникальный дизайн и эффективные маркетинговые решения для вашего бизнеса.",
+  "description": "Ведущее digital-агентство полного цикла. Веб-разработка, UX/UI дизайн, мобильные приложения, брендинг и digital-маркетинг.",
+  "version": "1.0.0",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#ffffff",
   "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "web", "design"],
+  "screenshots": [
+    {
+      "src": "/icon.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MetaFlux главная страница"
+    },
+    {
+      "src": "/icon.png", 
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MetaFlux мобильная версия"
+    }
+  ],
   "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "32x32", 
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon.png",
       "sizes": "192x192",
@@ -15,9 +74,73 @@
     },
     {
       "src": "/icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Услуги",
+      "short_name": "Услуги",
+      "description": "Посмотреть наши digital-услуги",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Портфолио",
+      "short_name": "Портфолио", 
+      "description": "Изучить наши проекты",
+      "url": "/portfolio",
+      "icons": [
+        {
+          "src": "/icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "О нас",
+      "short_name": "О нас",
+      "description": "Узнать о нашей команде",
+      "url": "/about",
+      "icons": [
+        {
+          "src": "/icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "mailto:info@metaflux.ru"
     }
   ]
 } 

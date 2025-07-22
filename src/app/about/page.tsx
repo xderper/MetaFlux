@@ -571,7 +571,7 @@ export default function AboutPage() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500 hidden lg:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500"></div>
             
             <div className="space-y-16">
               {journey.map((item, index) => (
@@ -580,15 +580,15 @@ export default function AboutPage() {
                   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`flex items-center gap-8 ${index % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}
+                  className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
                 >
-                  <div className="flex-1 lg:text-right" style={{ textAlign: index % 2 === 0 ? 'right' : 'left' }}>
+                  <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
                     <div className="text-4xl font-bold text-purple-400 mb-2">{item.year}</div>
                     <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
                     <p className="text-gray-400 leading-relaxed">{item.description}</p>
                   </div>
                   
-                  <div className="w-4 h-4 bg-purple-500 rounded-full hidden lg:block"></div>
+                  <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
                   
                   <div className="flex-1"></div>
                 </motion.div>

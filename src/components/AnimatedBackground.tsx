@@ -25,7 +25,7 @@ export default function AnimatedBackground() {
       const isSlowDevice = 
         isMobileDevice || // All mobile devices
         navigator.hardwareConcurrency <= 4 || // Low CPU cores
-        navigator.deviceMemory <= 4 || // Low RAM (if available)
+        (navigator as any).deviceMemory <= 4 || // Low RAM (if available)
         window.innerWidth <= 480; // Very small screens
       
       setIsLowPerformance(isSlowDevice);
@@ -48,7 +48,7 @@ export default function AnimatedBackground() {
         setIsLowPerformance(
           newIsMobile || 
           navigator.hardwareConcurrency <= 4 || 
-          navigator.deviceMemory <= 4 || 
+          (navigator as any).deviceMemory <= 4 || 
           newWidth <= 480
         );
       };

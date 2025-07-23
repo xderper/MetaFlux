@@ -33,17 +33,18 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     scrollRestoration: true,
     largePageDataBytes: 128 * 1000, // 128KB
-    // Enable optimized CSS loading
-    optimizeCss: true,
+    // Disable optimized CSS loading (requires critters dependency)
+    optimizeCss: false,
     // Enable partial prerendering for better mobile performance
     ppr: false, // Disable for now as it's experimental
-    // Enable faster refresh for development
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+
+  // Turbopack configuration (moved from experimental.turbo)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -191,8 +192,7 @@ const nextConfig: NextConfig = {
     // Optimize for mobile performance
     config.resolve.alias = {
       ...config.resolve.alias,
-      // Use lighter alternatives for mobile if available
-      'react-dom': dev ? 'react-dom' : 'react-dom/profiling',
+      // Keep standard react-dom to avoid profiling issues
     };
 
     // Bundle analyzer (uncomment to analyze bundle)

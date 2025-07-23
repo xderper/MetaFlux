@@ -131,9 +131,9 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.5, y: -30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
-              className="flex justify-center mb-6 sm:mb-8"
+              className="flex justify-center mb-8 sm:mb-12"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl p-3 sm:p-4">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 flex items-center justify-center shadow-2xl p-4 sm:p-5">
                 <Image 
                   src="/icon.png" 
                   alt="MetaFlux — Премиум Digital-агентство логотип" 
@@ -149,7 +149,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-2"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-2"
             >
               Elevating Business and
               <br />
@@ -160,16 +160,16 @@ export default function Home() {
             <motion.p 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-10 sm:mb-16 leading-relaxed px-4"
             >
-              Отправляйтесь в путешествие по созданию вашего MVP с передовым UI дизайном.
+              Embark on a journey of creating your MVP with cutting-edge UI design.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4"
             >
               <motion.a 
                 href={TELEGRAM}
@@ -177,42 +177,20 @@ export default function Home() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-gray-900 text-white rounded-full font-semibold text-base sm:text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl inline-block text-center min-h-[48px] flex items-center justify-center"
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-gray-900 text-white rounded-full font-semibold text-lg sm:text-xl hover:bg-gray-800 transition-all duration-300 shadow-xl inline-block text-center min-h-[56px] flex items-center justify-center"
               >
-                Связаться с нами
+                Contact Us
               </motion.a>
               <motion.a
                 href="/services"
                 whileHover={{ scale: 1.05, borderColor: "#8b5cf6", color: "#8b5cf6" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-300 text-gray-700 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
+                className="px-8 sm:px-10 py-4 sm:py-5 border-2 border-gray-300 text-gray-700 rounded-full font-semibold text-lg sm:text-xl transition-all duration-300 text-center min-h-[56px] flex items-center justify-center hover:bg-gray-50"
               >
-                Наши услуги
+                Our Services
               </motion.a>
             </motion.div>
           </div>
-
-          {/* Client Logos */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="absolute bottom-10 sm:bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-6xl px-4 sm:px-6"
-          >
-            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 opacity-40 grayscale">
-              {['Веб-разработка', 'UI/UX дизайн', 'Мобильные приложения', 'Брендинг', 'Digital маркетинг', 'Консалтинг'].map((service, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="text-gray-500 font-medium text-xs sm:text-sm md:text-base whitespace-nowrap"
-                >
-                  {service}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </section>
 
         {/* Photo Gallery */}

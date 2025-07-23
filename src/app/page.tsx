@@ -163,8 +163,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-10 sm:mb-16 leading-relaxed px-4"
             >
-              Embark on a journey of creating your MVP with cutting-edge UI design.
-            </motion.p>
+              Отправьтесь в путешествие по созданию вашего MVP с передовым UI-дизайном.
+            </motion.p>  
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}

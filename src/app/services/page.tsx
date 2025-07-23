@@ -30,7 +30,7 @@ export default function ServicesPage() {
       title: "UI/UX Дизайн",
       description: "Создаём интуитивные интерфейсы, которые влюбляют пользователей в ваш продукт",
       features: ["Пользовательские исследования", "Wireframing & Prototyping", "Visual Design", "Usability Testing"],
-      price: "от 25,000 ₽",
+      price: "от 10.000 ₽",
       color: "from-purple-500 to-pink-500",
       popular: false
     },
@@ -39,7 +39,7 @@ export default function ServicesPage() {
       title: "Веб-разработка",
       description: "Современные веб-приложения с передовыми технологиями и безупречной производительностью",
       features: ["React/Next.js", "Backend разработка", "База данных", "API интеграция"],
-      price: "от 50,000 ₽",
+      price: "от 20,000 ₽",
       color: "from-blue-500 to-cyan-500",
       popular: true
     },
@@ -47,8 +47,8 @@ export default function ServicesPage() {
       icon: Smartphone,
       title: "Мобильные приложения",
       description: "Нативные и кроссплатформенные приложения для iOS и Android",
-      features: ["React Native", "Swift/Kotlin", "Push уведомления", "App Store оптимизация", "Интеграция с устройством"],
-      price: "от 70,000 ₽",
+      features: ["React Native", "Swift/Kotlin", "Push уведомления", "App Store оптимизация"],
+      price: "от 30,000 ₽",
       color: "from-green-500 to-teal-500",
       popular: false
     },
@@ -57,7 +57,7 @@ export default function ServicesPage() {
       title: "Брендинг",
       description: "Комплексная разработка бренда: от логотипа до brand book",
       features: ["Логотип и фирменный стиль", "Brand book", "Маркетинговые материалы", "Brand strategy"],
-      price: "от 15,000 ₽",
+      price: "от 5,000 ₽",
       color: "from-orange-500 to-red-500",
       popular: false
     },
@@ -66,7 +66,7 @@ export default function ServicesPage() {
       title: "Digital маркетинг",
       description: "Продвижение вашего продукта и увеличение конверсий",
       features: ["SEO оптимизация", "Контекстная реклама", "Social Media", "Email маркетинг"],
-      price: "от 40,000 ₽",
+      price: "от 10.000 ₽",
       color: "from-indigo-500 to-purple-500",
       popular: false
     },
@@ -75,7 +75,7 @@ export default function ServicesPage() {
       title: "Консультации",
       description: "Экспертные консультации по digital стратегии и развитию продукта",
       features: ["Product Strategy", "Technical Audit", "UX Audit", "Growth Hacking"],
-      price: "от 10,000 ₽",
+      price: "от 5,000 ₽",
       color: "from-yellow-500 to-orange-500",
       popular: false
     }
@@ -386,7 +386,7 @@ export default function ServicesPage() {
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -394,12 +394,12 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -15, rotateY: 5, rotateX: 5 }}
-                className="group relative"
+                className="group relative h-full"
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                <div className="relative glass-effect rounded-3xl p-8 border border-purple-500/20 hover:border-purple-400/50 transition-all duration-500 neon-glow overflow-hidden">
+                <div className="relative glass-effect rounded-3xl p-8 border border-purple-500/20 hover:border-purple-400/50 transition-all duration-500 neon-glow overflow-hidden h-full flex flex-col">
                   {/* Holographic gradient overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                   
@@ -425,28 +425,30 @@ export default function ServicesPage() {
                     <div className="absolute inset-0 holographic opacity-0 group-hover:opacity-20 rounded-3xl transition-opacity duration-500"></div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300">{service.title}</h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">{service.description}</p>
+                  <div className="flex flex-col flex-grow">
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300">{service.title}</h3>
+                    <p className="text-gray-300 mb-6 leading-relaxed">{service.description}</p>
+                    
+                    <ul className="space-y-3 mb-8 flex-grow">
+                      {service.features.map((feature, i) => (
+                        <motion.li 
+                          key={i} 
+                          className="flex items-center gap-3"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 * i }}
+                        >
+                          <div className="w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center relative">
+                            <Check className="w-4 h-4 text-white" />
+                            <div className="absolute inset-0 bg-green-400 rounded-full animate-pulse-ring opacity-30"></div>
+                          </div>
+                          <span className="text-gray-200">{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
                   
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature, i) => (
-                      <motion.li 
-                        key={i} 
-                        className="flex items-center gap-3"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 * i }}
-                      >
-                        <div className="w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center relative">
-                          <Check className="w-4 h-4 text-white" />
-                          <div className="absolute inset-0 bg-green-400 rounded-full animate-pulse-ring opacity-30"></div>
-                        </div>
-                        <span className="text-gray-200">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                  
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-auto">
                     <div className="text-3xl font-bold text-shimmer">{service.price}</div>
                     <motion.a
                       href={TELEGRAM}
@@ -470,58 +472,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-gray-900 via-purple-900/20 to-black text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Наш
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                {" "}процесс
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Проверенная методология, которая гарантирует успех вашего проекта
-            </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {processes.map((process, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="relative group"
-              >
-                <div className="relative glass-effect rounded-3xl p-8 border border-gray-700 hover:border-purple-500/50 transition-all duration-500 overflow-hidden h-56 flex flex-col">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <div className="absolute top-2 left-8 z-10">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      {process.step}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-8 relative z-10 flex-grow flex flex-col">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-4">{process.title}</h3>
-                    <div className="flex items-start gap-4">
-                      <span className="text-3xl animate-float hidden md:inline">{process.icon}</span>
-                      <p className="text-gray-400 leading-relaxed flex-grow">{process.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Benefits Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50 relative">

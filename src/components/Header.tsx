@@ -2,12 +2,31 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Menu } from 'lucide-react';
 import { TELEGRAM } from '../config/env';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Check if device is mobile
+      setIsMobile(window.innerWidth <= 768);
+      
+      // Check for reduced motion preference
+      setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -53,9 +72,13 @@ export default function Header() {
             href={TELEGRAM}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={!isMobile && !prefersReducedMotion ? { scale: 1.05 } : {}}
+            whileTap={!isMobile && !prefersReducedMotion ? { scale: 0.95 } : {}}
             className="hidden md:block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300 text-center"
+            style={{
+              willChange: !isMobile ? 'transform' : 'auto',
+              transform: 'translateZ(0)'
+            }}
           >
             Связаться с нами
           </motion.a>
@@ -109,13 +132,20 @@ export default function Header() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ 
+                duration: prefersReducedMotion ? 0.01 : 0.2, 
+                ease: 'easeOut'
+              }}
               className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 md:hidden"
+              style={{
+                willChange: 'transform',
+                transform: 'translateZ(0)'
+              }}
             >
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
                 <div className="px-6 py-8 border-b border-gray-200">
-                  <div className="flex items-center gap-3">
+                  <Link href="/" className="flex items-center gap-3" onClick={closeMobileMenu}>
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center p-2">
                       <Image 
                         src="/icon.png" 
@@ -126,7 +156,7 @@ export default function Header() {
                       />
                     </div>
                     <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">MetaFlux</span>
-                  </div>
+                  </Link>
                 </div>
                 
                 {/* Navigation Links */}
@@ -139,9 +169,16 @@ export default function Header() {
                     ].map((item, index) => (
                       <motion.div
                         key={item.name}
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={!prefersReducedMotion ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 + 0.2 }}
+                        transition={!prefersReducedMotion ? { 
+                          delay: index * 0.05 + 0.1,
+                          duration: 0.2
+                        } : { duration: 0.01 }}
+                        style={{
+                          willChange: !prefersReducedMotion ? 'transform, opacity' : 'auto',
+                          transform: 'translateZ(0)'
+                        }}
                       >
                         <Link 
                           href={item.href}
@@ -161,11 +198,18 @@ export default function Header() {
                     href={TELEGRAM}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={!prefersReducedMotion ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
+                    transition={!prefersReducedMotion ? { 
+                      delay: 0.3,
+                      duration: 0.2
+                    } : { duration: 0.01 }}
                     onClick={closeMobileMenu}
                     className="block w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-semibold text-center hover:shadow-lg transition-all duration-300"
+                    style={{
+                      willChange: !prefersReducedMotion ? 'transform, opacity' : 'auto',
+                      transform: 'translateZ(0)'
+                    }}
                   >
                     Связаться с нами
                   </motion.a>

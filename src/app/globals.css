@@ -73,13 +73,44 @@ html, body {
     scroll-behavior: smooth;
   }
   
+  /* Force GPU acceleration for better performance */
+  .animate-floating,
+  .animate-pulse-glow,
+  .animate-gradient,
+  .animate-shimmer,
+  .card-3d,
+  .hover-lift,
+  .hover-scale,
+  .hover-float {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
   /* Disable hover effects on touch devices */
   .hover-lift:hover,
   .hover-glow:hover,
   .hover-scale:hover,
   .hover-float:hover {
-    transform: none !important;
+    transform: translateZ(0) !important;
     box-shadow: inherit !important;
+  }
+  
+  /* Reduce expensive effects on touch devices */
+  .glassmorphism {
+    backdrop-filter: blur(8px);
+  }
+  
+  .glassmorphism-dark {
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Simplify blur effects */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px);
+  }
+  
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(16px);
   }
 }
 
@@ -583,13 +614,37 @@ html, body {
     line-height: 1.4 !important;
   }
   
-  /* Reduce motion on mobile for better performance */
+  /* Optimize animations for mobile performance */
   .animate-floating {
+    animation-duration: 6s;
+    animation-timing-function: linear;
+  }
+  
+  .animate-pulse-glow {
+    animation-duration: 3s;
+  }
+  
+  .animate-gradient {
     animation-duration: 4s;
   }
   
+  .animate-shimmer {
+    animation-duration: 3s;
+  }
+  
+  /* Disable 3D effects on mobile */
   .card-3d:hover {
-    transform: none;
+    transform: translateZ(0);
+  }
+  
+  /* Force GPU acceleration for mobile animations */
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in,
+  .animate-bounce-in {
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
   
   /* Adjust padding for mobile */
@@ -908,6 +963,126 @@ a:focus-visible {
 @media print {
   .no-print {
     display: none !important;
+  }
+}
+
+/* Performance-based optimizations */
+.low-performance {
+  /* Disable expensive animations on low-performance devices */
+  .animate-floating,
+  .animate-pulse-glow,
+  .animate-gradient,
+  .animate-shimmer,
+  .animate-bounce-in {
+    animation: none !important;
+  }
+  
+  /* Reduce blur effects */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(8px) !important;
+  }
+  
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(12px) !important;
+  }
+  
+  /* Simplify glassmorphism */
+  .glassmorphism {
+    backdrop-filter: blur(6px) !important;
+  }
+  
+  .glassmorphism-dark {
+    backdrop-filter: blur(6px) !important;
+  }
+  
+  /* Disable 3D effects */
+  .card-3d,
+  .card-3d:hover {
+    transform: none !important;
+  }
+  
+  /* Disable hover effects */
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover,
+  .hover-float:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+  
+  /* Force GPU acceleration where still needed */
+  .will-change-transform {
+    will-change: auto !important;
+  }
+}
+
+.high-performance {
+  /* Enable all effects for high-performance devices */
+  .will-change-transform {
+    will-change: transform;
+  }
+}
+
+/* CSS custom property-based optimizations */
+:root {
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.6s;
+  --blur-light: blur(4px);
+  --blur-medium: blur(12px);
+  --blur-heavy: blur(24px);
+}
+
+/* Adjust based on performance level */
+:root[style*="--performance-level: low"] {
+  --animation-duration-fast: 0.1s;
+  --animation-duration-normal: 0.2s;
+  --animation-duration-slow: 0.3s;
+  --blur-light: blur(3px);
+  --blur-medium: blur(6px);
+  --blur-heavy: blur(10px);
+}
+
+/* Use CSS custom properties in animations */
+.performance-aware-animation {
+  animation-duration: var(--animation-duration-normal);
+}
+
+.performance-aware-blur {
+  backdrop-filter: var(--blur-medium);
+}
+
+/* Frame rate optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation frame rate on mobile */
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-5px) rotate(0.5deg);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+  }
+  
+  /* Optimize gradient animations */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
   }
 }
 

@@ -33,6 +33,19 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     scrollRestoration: true,
     largePageDataBytes: 128 * 1000, // 128KB
+    // Enable optimized CSS loading
+    optimizeCss: true,
+    // Enable partial prerendering for better mobile performance
+    ppr: false, // Disable for now as it's experimental
+    // Enable faster refresh for development
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
 
   // Headers for security and SEO
@@ -141,8 +154,46 @@ const nextConfig: NextConfig = {
       config.optimization = {
         ...config.optimization,
         sideEffects: false,
+        // Split chunks for better mobile loading
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          chunks: 'all',
+          cacheGroups: {
+            ...config.optimization.splitChunks?.cacheGroups,
+            // Separate vendor chunks for better caching
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              maxSize: 100000, // 100KB max for mobile
+            },
+            // Separate framer-motion for conditional loading
+            framerMotion: {
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              name: 'framer-motion',
+              chunks: 'all',
+              priority: 20,
+            },
+            // Common chunks
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              priority: 10,
+              reuseExistingChunk: true,
+              maxSize: 50000, // 50KB max for common chunks
+            },
+          },
+        },
       };
     }
+
+    // Optimize for mobile performance
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Use lighter alternatives for mobile if available
+      'react-dom': dev ? 'react-dom' : 'react-dom/profiling',
+    };
 
     // Bundle analyzer (uncomment to analyze bundle)
     // if (!dev && !isServer) {

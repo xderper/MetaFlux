@@ -5,6 +5,14 @@ set -e
 
 echo "🚀 Развертывание MetaFlux на VPS..."
 
+if docker compose version &>/dev/null; then
+    COMPOSE="docker compose"
+elif command -v docker-compose &>/dev/null; then
+    COMPOSE="docker-compose"
+else
+    COMPOSE=""
+fi
+
 # Проверяем наличие Docker
 if ! command -v docker &> /dev/null; then
     echo "❌ Docker не установлен. Устанавливаем Docker..."
@@ -16,11 +24,16 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Проверяем наличие Docker Compose
-if ! command -v docker-compose &> /dev/null; then
-    echo "❌ Docker Compose не установлен. Устанавливаем..."
-    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
-    echo "✅ Docker Compose установлен"
+if [ -z "$COMPOSE" ]; then
+    if docker compose version &>/dev/null; then
+        COMPOSE="docker compose"
+    else
+        echo "❌ Docker Compose не установлен. Устанавливаем..."
+        sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        COMPOSE="docker-compose"
+        echo "✅ Docker Compose установлен"
+    fi
 fi
 
 # Проверяем переменные окружения
@@ -30,7 +43,9 @@ read -p "Использовать SSL? (y/n): " USE_SSL
 
 # Останавливаем предыдущие контейнеры
 echo "🛑 Остановка предыдущих контейнеров..."
-docker-compose down 2>/dev/null || true
+$COMPOSE -f docker-compose.simple.yml down 2>/dev/null || true
+$COMPOSE -f docker-compose.prod.yml down 2>/dev/null || true
+$COMPOSE down 2>/dev/null || true
 
 # Выбираем конфигурацию
 if [ "$USE_SSL" = "y" ] || [ "$USE_SSL" = "Y" ]; then
@@ -64,21 +79,35 @@ else
     COMPOSE_FILE="docker-compose.simple.yml"
 fi
 
+mkdir -p certbot/www
+
 # Собираем и запускаем приложение
 echo "🏗️  Сборка и запуск приложения..."
-docker-compose -f $COMPOSE_FILE up -d --build
+$COMPOSE -f $COMPOSE_FILE up -d --build
 
 # Ждем запуска приложения
 echo "⏳ Ожидание запуска приложения..."
-sleep 30
+for i in $(seq 1 30); do
+    if $COMPOSE -f $COMPOSE_FILE ps 2>/dev/null | grep -qE 'healthy|Up'; then
+        sleep 3
+        break
+    fi
+    sleep 2
+done
 
 # Проверяем статус
 echo "📊 Проверка статуса контейнеров..."
-docker-compose -f $COMPOSE_FILE ps
+$COMPOSE -f $COMPOSE_FILE ps
 
-# Показываем логи
-echo "📋 Последние логи:"
-docker-compose -f $COMPOSE_FILE logs --tail=20
+NGINX_ERR="$($COMPOSE -f $COMPOSE_FILE logs nginx --tail=50 2>/dev/null | grep -E '\[emerg\]|\[alert\]|\[error\]' || true)"
+if [ -n "$NGINX_ERR" ]; then
+    echo "❌ Nginx сообщил об ошибке:"
+    echo "$NGINX_ERR"
+    exit 1
+fi
+
+echo "📋 Последние логи приложения:"
+$COMPOSE -f $COMPOSE_FILE logs metaflux --tail=15
 
 echo ""
 echo "🎉 Развертывание завершено!"
@@ -92,7 +121,7 @@ else
 fi
 echo ""
 echo "🔧 Полезные команды:"
-echo "   Просмотр логов: docker-compose -f $COMPOSE_FILE logs -f"
-echo "   Остановка: docker-compose -f $COMPOSE_FILE down"
-echo "   Перезапуск: docker-compose -f $COMPOSE_FILE restart"
-echo "   Обновление: git pull && docker-compose -f $COMPOSE_FILE up -d --build" 
+echo "   Просмотр логов: $COMPOSE -f $COMPOSE_FILE logs -f"
+echo "   Остановка: $COMPOSE -f $COMPOSE_FILE down"
+echo "   Перезапуск: $COMPOSE -f $COMPOSE_FILE restart"
+echo "   Обновление: git pull && $COMPOSE -f $COMPOSE_FILE up -d --build"

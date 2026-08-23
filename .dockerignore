@@ -24,6 +24,8 @@ coverage
 Dockerfile
 .dockerignore
 docker-compose.yml
+docker-compose.simple.yml
+docker-compose.prod.yml
 
 # IDE
 .vscode
@@ -41,7 +43,10 @@ logs
 *.tmp
 *.temp
 
-# Development files
-README.md
-TELEGRAM_SETUP.md
-DOCKER_DEPLOY.md 
+# Docs and deploy helpers (not needed in the image)
+*.md
+deploy.sh
+nginx.conf
+nginx.simple.conf
+ssl
+certbot
